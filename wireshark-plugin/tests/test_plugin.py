@@ -1,4 +1,3 @@
-"""Compare plugin output with independent native tshark fields (no third-party modules)."""
 import argparse
 import csv
 import hashlib
