@@ -1,3 +1,4 @@
+"""生成确定性的离线 TCP 异常和 DNS 测试样例，只使用 Python 标准库。"""
 from pathlib import Path
 import socket
 import struct
@@ -36,14 +37,14 @@ def build(path):
     send(False, 1001, 9001)
     request = b"GET /fixture HTTP/1.1\r\nHost: example.test\r\n\r\n"
     send(False, 1001, 9001, 24, request)
-    # Same segment repeats three times, each counted at most once as retransmission.
+    # 同一数据段重复三次，每次最多只计一次重传。
     for _ in range(3):
         send(False, 1001, 9001, 24, request)
     send(True, 9001, 1001)
     for _ in range(3):
         send(True, 9001, 1001)
     send(True, 9001, 1001, window=0)
-    # Deliberately reordered data and a reset, without any live network traffic.
+    # 故意构造乱序数据和 RST，全程不产生真实网络流量。
     send(False, 1001 + len(request) + 10, 9001, 24, b"later")
     send(False, 1001 + len(request), 9001, 24, b"0123456789")
     send(False, 1001 + len(request) + 15, 9001, 20)
@@ -52,7 +53,7 @@ def build(path):
     send(True, 7000, 3001, 18, dns=True)
     send(False, 3001, 7001, dns=True)
     question = b"\x07example\x04test\0" + struct.pack("!HH", 1, 1)
-    # Two questions in one query message must still count as ONE DNS query.
+    # 一个 DNS 查询报文里有两个问题，仍然只算一次 DNS 查询。
     query = struct.pack("!6H", 0x1234, 0x0100, 2, 0, 0, 0) + question + question
     response = struct.pack("!6H", 0x1234, 0x8180, 0, 0, 0, 0)
     send(False, 3001, 7001, 24, struct.pack("!H", len(query)) + query, dns=True)
@@ -62,8 +63,8 @@ def build(path):
     with path.open("wb") as stream:
         stream.write(struct.pack("<IHHIIII", 0xA1B2C3D4, 2, 4, 0, 0, 65535, 1))
         for index, frame in enumerate(packets):
-            # The missing earlier segment arrives within 0.5 ms: Wireshark's
-            # out-of-order timing heuristic can distinguish it from a retransmit.
+            # 缺失的前一段在 0.5 毫秒内到达，Wireshark 的
+            # 乱序时间启发式可以把它和重传区分开。
             micros = 120500 if index == 13 else index * 10000
             stream.write(struct.pack("<IIII", 1700000000, micros, len(frame), len(frame)))
             stream.write(frame)

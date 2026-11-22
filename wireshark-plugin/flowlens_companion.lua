@@ -1,6 +1,6 @@
--- FlowLens Companion for Wireshark. Lua 5.2+ / Wireshark 3.6+.
+-- FlowLens Wireshark 伴生插件，支持 Lua 5.2+ / Wireshark 3.6+。
 -- SPDX-License-Identifier: MIT
--- Standalone tap: no dissector, capture, network access, or FlowLens dependency.
+-- 独立 tap：不注册解析器、不抓包、不访问网络，也不依赖 FlowLens 主程序。
 local prior = rawget(_G, "__flowlens_companion_v1")
 if prior then return prior end
 
@@ -24,7 +24,7 @@ end
 local function values(key)
     local extractor = extractors[key]
     if not extractor then return {} end
-    -- Consume FieldInfo here; never retain it after the packet callback.
+    -- 在这里读取 FieldInfo，不要在报文回调结束后继续保存它。
     local ok, fields = pcall(function() return { extractor() } end)
     if not ok then unavailable[key] = field_names[key]; return {} end
     local result = {}
@@ -68,13 +68,13 @@ end
 
 function M.ingest(state, pinfo)
     local streams = values("stream")
-    -- Multiple TCP layers cannot safely share the other field extractors.
+    -- 存在多个 TCP 层时，不能安全地共用其他字段提取器。
     if #streams ~= 1 then state.skipped = state.skipped + 1; return end
     local id = tonumber(streams[1])
     if not id then state.skipped = state.skipped + 1; return end
     local frame = tonumber(pvalue(pinfo, "number"))
-    -- The frame tap runs once per frame. Also tolerate duplicate callbacks and
-    -- complete rescans without a reset, with O(streams), not O(packets), storage.
+    -- 帧监听每帧只运行一次，同时兼容重复回调和
+    -- 不重置时的完整重扫，存储复杂度为 O(流数) 而不是 O(报文数)。
     if frame and state.last_frame and frame < state.last_frame then
         state.flows, state.packets, state.bytes, state.skipped = {}, 0, 0, 0
         state.last_frame = nil
@@ -109,7 +109,7 @@ function M.ingest(state, pinfo)
         if present(key) then row[key] = row[key] + 1 end
     end
     row.http_requests = row.http_requests + true_count("http_requests")
-    -- Count query messages, not questions: one message may have many questions.
+    -- 统计查询报文而不是问题条目，一个报文里可能有多个问题。
     for _, response in ipairs(values("dns_response")) do
         if response == false or tonumber(response) == 0
                 or tostring(response):lower() == "false" then
@@ -236,7 +236,7 @@ function M.apply_stream(state, input)
 end
 function M.listen(on_draw)
     local state = new_state()
-    local tap = Listener.new(nil, "tcp", true) -- Three arguments also work in 3.6.
+    local tap = Listener.new(nil, "tcp", true) -- 三个参数的写法在 3.6 中也可用。
     tap.packet = function(pinfo) M.ingest(state, pinfo) end
     tap.reset = function()
         local fresh = new_state()

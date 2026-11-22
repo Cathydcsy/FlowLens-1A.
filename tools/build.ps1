@@ -30,8 +30,8 @@ $rcCmake=(Join-Path $sdkBin 'rc.exe').Replace('\','/')
 $mtCmake=(Join-Path $sdkBin 'mt.exe').Replace('\','/')
 & $cmakePath -S $projectRoot -B $buildRoot -G Ninja "-DCMAKE_BUILD_TYPE=$configuration" "-DCMAKE_CXX_COMPILER=$compilerCmake" "-DCMAKE_RC_COMPILER=$rcCmake" "-DCMAKE_MT=$mtCmake" "-DCMAKE_PREFIX_PATH=$($QtRoot.Replace('\','/'))" "-DFLOWLENS_BUILD_GUI=$guiValue" "-DFLOWLENS_SANITIZE=$sanitizerValue"
 if($LASTEXITCODE){throw 'Configuration failed'}
-# This machine has localized MSVC include diagnostics. A clean build prevents
-# stale ABI objects if older CMake/Ninja fails to recognize those diagnostics.
+# 本机 MSVC 的诊断信息是中文，先清理再构建可以避免
+# 旧版 CMake/Ninja 识别不了这些诊断时留下过期对象文件，导致 ABI 不一致。
 & $cmakePath --build $buildRoot --config $configuration --parallel 4 --clean-first
 if($LASTEXITCODE){throw 'Build failed'}
 if($Sanitize){Copy-Item -LiteralPath (Join-Path $compilerDir 'clang_rt.asan_dynamic-x86_64.dll') -Destination $buildRoot -Force}

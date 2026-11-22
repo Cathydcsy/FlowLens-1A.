@@ -6,7 +6,7 @@
 
 namespace fl {
 namespace {
-// Minimal public libpcap ABI. Runtime loading avoids bundling the proprietary driver.
+// 这里只声明程序用到的最小 libpcap ABI，运行时动态加载，避免随程序分发专有驱动。
 struct pcap;
 struct pcap_if {
     pcap_if* next;

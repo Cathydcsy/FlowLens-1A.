@@ -35,7 +35,7 @@ struct Packet {
     std::vector<Field> fields;
     std::vector<std::string> warnings;
     std::string source, destination, protocol = "Unknown", info, process, peerProcess, httpHost;
-    // Flow-level evidence is separate from the packet's direct PID snapshot.
+    // 会话级归属证据与报文直接观察到的 PID 快照分开保存。
     std::map<uint32_t, std::string> flowProcesses;
     uint16_t sourcePort = 0, destinationPort = 0;
     uint8_t ipVersion = 0, transport = 0, tcpFlags = 0;

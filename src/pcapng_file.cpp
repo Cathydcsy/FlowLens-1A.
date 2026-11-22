@@ -51,7 +51,7 @@ uint64_t timestamp(uint64_t ticks, const Interface& iface) {
     if (!(iface.resolution & 128)) {
         uint64_t factor = 1;
         unsigned power = exponent > 9 ? exponent - 9 : 9 - exponent;
-        if (power >= 20) ns = 0; // Any uint64 tick value is below one nanosecond.
+        if (power >= 20) ns = 0; // 任意 uint64 tick 值都小于 1 纳秒。
         else {
             while (power--) factor *= 10;
             if (exponent <= 9) {
@@ -60,7 +60,7 @@ uint64_t timestamp(uint64_t ticks, const Interface& iface) {
             } else ns = ticks / factor;
         }
     } else {
-        // Exact 64 x 32 -> 96-bit product; no floating point or compiler-specific __int128.
+        // 精确计算 64 位乘 32 位的 96 位乘积，不使用浮点，也不依赖编译器特有的 __int128。
         uint64_t lowProduct = (ticks & 0xffffffffULL) * 1000000000ULL;
         uint64_t upperProduct = (ticks >> 32) * 1000000000ULL + (lowProduct >> 32);
         uint64_t low = (upperProduct << 32) | (lowProduct & 0xffffffffULL), high = upperProduct >> 32;

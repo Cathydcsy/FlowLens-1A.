@@ -15,7 +15,7 @@ class FlowLensStyle final : public QProxyStyle {
 
     int styleHint(StyleHint hint, const QStyleOption* option = nullptr,
                   const QWidget* widget = nullptr, QStyleHintReturn* returnData = nullptr) const override {
-        // Use a list below the control instead of centering a menu on its selected item.
+        // 在控件下方使用列表，而不是把菜单居中到当前选中项。
         if (hint == QStyle::SH_ComboBox_Popup)
             return 0;
         return QProxyStyle::styleHint(hint, option, widget, returnData);

@@ -1,4 +1,4 @@
-"""Render real Qt widgets in a hidden window; never captures the desktop or starts packet capture."""
+"""在隐藏窗口中渲染真实 Qt 控件，不读取桌面，也不启动抓包。"""
 from pathlib import Path
 import argparse
 import json
@@ -15,8 +15,8 @@ options.output.mkdir(parents=True, exist_ok=True)
 environment = os.environ.copy()
 environment['PATH'] = str(options.qt_root / 'bin') + os.pathsep + environment['PATH']
 environment['QT_PLUGIN_PATH'] = str(options.qt_root / 'plugins')
-# Old Qt's generic offscreen backend on Windows has no font engine. Use the
-# native font engine with WA_DontShowOnScreen; QWidget::render reads no screen.
+# Windows 上旧版 Qt 的通用离屏后端没有字体引擎，改用
+# 原生字体引擎配合 WA_DontShowOnScreen；QWidget::render 不读取桌面画面。
 environment['QT_QPA_PLATFORM'] = 'windows'
 environment['QT_SCALE_FACTOR'] = '1'
 command = [str(options.exe), '--preview-ui', str(options.output), str(ROOT / 'samples/showcase.pcap')]

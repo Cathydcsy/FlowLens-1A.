@@ -1,11 +1,12 @@
-"""Generate only samples/plus fixtures; never rewrite the original course samples."""
 from pathlib import Path
 import json
 import sys
 import struct
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'tools/.cache/python'))
+_CACHE = ROOT / 'tools' / '.cache' / 'python'
+if _CACHE.exists():
+    sys.path.insert(0, str(_CACHE))
 from scapy.all import Ether, IP, IPv6, IPv6ExtHdrFragment, fragment, fragment6, rdpcap, wrpcap
 
 

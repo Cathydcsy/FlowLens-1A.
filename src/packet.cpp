@@ -661,7 +661,7 @@ std::string inspectHttp(const std::vector<uint8_t>& bytes) {
     return result.str();
 }
 void parse(Packet& p) {
-    // A new parse must not retain derived fields from previous input.
+    // 重新解析时不能保留上一次输入留下的派生字段。
     p.fields.clear();
     p.warnings.clear();
     p.source.clear();

@@ -61,7 +61,7 @@ void DirectionStream::insert(uint32_t seq, const uint8_t* data, size_t n) {
                 if (data[size_t(i - start)] != it->second[size_t(i - it->first)])
                     conflicts++;
         }
-        // First-seen bytes win on conflicting retransmissions; count the conflicts.
+        // 冲突重传时保留首次出现的字节，并统计冲突次数。
         std::copy(it->second.begin(), it->second.end(), merged.begin() + size_t(it->first - lo));
     }
     chunks.erase(begin, stop);

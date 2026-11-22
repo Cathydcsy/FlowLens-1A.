@@ -8,7 +8,7 @@ class DisplayFilter {
     std::function<bool(const Packet&)> predicate_ = [](const Packet&) { return true; };
 
   public:
-    // Compile transactionally: invalid expressions leave the previous filter intact.
+    // 采用事务式编译：表达式非法时保留上一条有效过滤条件。
     bool compile(const std::string& expression, std::string& error);
     bool matches(const Packet& p) const {
         return predicate_(p);

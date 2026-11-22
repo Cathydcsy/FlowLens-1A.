@@ -646,7 +646,7 @@ void MainWindow::append(std::vector<Packet>&& batch) {
             displayDiscarded_++;
     }
     model_->append(std::move(retained));
-    // A reassembled HTTP start line can update classification of earlier segments.
+    // 重组后的 HTTP 起始行可以把更早的数据段重新标记为 HTTP。
     bool changed = false;
     for (auto& p : model_->packets) {
         auto f = flows_.get(p.flowId);
@@ -669,7 +669,7 @@ bool MainWindow::loadPcap(const QString& path) {
     stopCapture();
     std::vector<Packet> packets;
     try {
-        // Read transactionally before discarding the current session.
+        // 先完整读取，确认成功后再丢弃当前会话。
         size_t loadedBytes = 0;
         auto fileInfo = readPcap(
             pathBytes(path),
@@ -1106,7 +1106,7 @@ void MainWindow::previewAndVerify(const QString& directory, const QString& fixtu
     auto snapshot = [&](const QString& name) {
         qApp->processEvents();
         QPixmap image(size()); image.fill(Qt::transparent);
-        render(&image); // Render this widget; never reads the user's desktop.
+        render(&image); // 只渲染当前控件，不读取桌面画面。
         check(qPrintable(name), image.save(QDir(directory).filePath(name)));
     };
     auto destination = [&](const QString& name) { qApp->setProperty("validationExportPath", QDir(directory).filePath(name)); };

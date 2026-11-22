@@ -49,7 +49,7 @@ void IpReassembler::clear() {
 }
 void IpReassembler::ingest(Packet& p) {
     expire(p.timestampNs);
-    if (!p.fragmented || !p.fragment.present) return; // Atomic IPv6 fragments use ordinary parsing.
+    if (!p.fragmented || !p.fragment.present) return; // IPv6 原子分片按普通报文解析。
     ++stats_.fragments;
     const auto& f = p.fragment;
     std::string key = std::to_string(p.sectionId) + "/" + std::to_string(p.interfaceId) + "/" +

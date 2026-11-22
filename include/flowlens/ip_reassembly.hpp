@@ -30,9 +30,9 @@ class IpReassembler {
     void erase(std::map<std::string, Entry>::iterator it);
   public:
     explicit IpReassembler(IpReassemblyLimits limits = {}) : limits_(limits) {}
-    void ingest(Packet& packet); // Call parse(packet) first; original bytes stay intact.
+    void ingest(Packet& packet); // 先调用 parse(packet)，原始字节保持不变。
     void expire(uint64_t timestampNs);
-    void finish(); // End of capture: count and release incomplete datagrams.
+    void finish(); // 捕获结束时统计并释放未完成的数据报。
     void clear();
     size_t pending() const;
     size_t buffered() const { return buffered_; }

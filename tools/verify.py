@@ -1,4 +1,4 @@
-"""Cross-check independently decoded packet fields with Scapy and run a measured benchmark."""
+"""使用 Scapy 独立核对报文解析字段，并运行一次带计时的基准测试。"""
 import sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]

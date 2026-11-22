@@ -1,4 +1,4 @@
-"""Deterministic synthetic lab traffic. No external network access is performed."""
+"""生成确定性的实验流量，不访问外部网络。"""
 import json
 import ipaddress
 import struct
@@ -46,7 +46,7 @@ A,B='192.0.2.10','198.51.100.20'
 req=b'GET /lab?course=security HTTP/1.1\r\nHost: lab.example\r\nUser-Agent: FlowLens-fixture\r\nContent-Length: 0\r\n\r\n'
 resp=b'HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 20\r\n\r\nHello from FlowLens!'
 frames=[tcp(A,B,51000,18080,1000,0,2),tcp(B,A,18080,51000,5000,1001,18),tcp(A,B,51000,18080,1001,5001,16)]
-# Receive the second part first, then fill its gap, then see an exact retransmission.
+# 先收到后一段，再补齐缺口，最后制造一次完全重复的重传。
 cut=29
 frames += [tcp(A,B,51000,18080,1001+cut,5001,24,req[cut:]),tcp(A,B,51000,18080,1001,5001,24,req[:cut]),tcp(A,B,51000,18080,1001,5001,24,req[:cut])]
 frames += [tcp(B,A,18080,51000,5001,1001+len(req),24,resp[:37]),tcp(B,A,18080,51000,5038,1001+len(req),24,resp[37:]),tcp(A,B,51000,18080,1001+len(req),5001+len(resp),17),tcp(B,A,18080,51000,5001+len(resp),1002+len(req),17)]
@@ -73,12 +73,12 @@ pcap(OUT/'loopback.pcap',[struct.pack('<I',2)+frames[0][14:]],link=0)
 pcap(OUT/'raw_ipv6.pcap',[frames[14][14:]],link=101)
 pcap(OUT/'ipv6_empty.pcap',[eth(ip6(V6A,V6B,59,b''),0x86dd)])
 pcap(OUT/'vlan.pcap',[frames[0][:12]+struct.pack('!HHH',0x8100,7,0x800)+frames[0][14:]])
-# IPv6 extension header preceding UDP and an atomic fragment.
+# 构造 UDP 前的 IPv6 扩展头和原子分片。
 u=udp(V6A,V6B,54000,53,query,v6=True)[54:]
 pcap(OUT/'ipv6_extensions.pcap',[eth(ip6(V6A,V6B,0,bytes([17,0])+b'\0'*6+u),0x86dd),eth(ip6(V6A,V6B,44,bytes([17,0])+b'\0'*6+u),0x86dd)])
 bad=[b'\0'*8,eth(ip4(A,B,6,b'\0'*5)),eth(ip4(A,B,17,b'\0'*8)),eth(ip4(A,B,6,b'\0'*20,frag=0x2000)),udp(A,B,53000,53,struct.pack('!HHHHHH',1,0x100,1,0,0,0)+b'\xc0\x0c\0\1\0\1')]
 pcap(OUT/'edge_cases.pcap',bad)
-# Correct HTTP chunked transfer and serial-number wraparound.
+# 构造正确的 HTTP 分块传输和 TCP 序号回绕。
 chunk=b'HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n5\r\nHello\r\n6\r\n world\r\n0\r\n\r\n'
 pcap(OUT/'chunked.pcap',[tcp(A,B,18080,57000,0xfffffff0,0,2),tcp(A,B,18080,57000,0xfffffff1,0,24,chunk[:20]),tcp(A,B,18080,57000,0xfffffff1+20,0,24,chunk[20:])])
 pcap(OUT/'truncated_record.pcap',frames[:1]);p=OUT/'truncated_record.pcap';p.write_bytes(p.read_bytes()[:-4])

@@ -1,3 +1,4 @@
+"""将插件输出与 tshark 原生字段对照，不依赖第三方模块。"""
 import argparse
 import csv
 import hashlib
@@ -80,7 +81,7 @@ def main():
     plugin_directory = scratch / "profile" / "plugins"
     plugin_directory.mkdir(exist_ok=True)
     (plugin_directory / "flowlens_companion.lua").write_bytes((ROOT / "flowlens_companion.lua").read_bytes())
-    # ASCII temp CSV also permits old Windows Lua runtimes without UTF-8 fopen.
+    # 使用 ASCII 临时 CSV，兼容不支持 UTF-8 fopen 的旧版 Windows Lua 运行时。
     with tempfile.TemporaryDirectory(prefix="flowlens-") as temp:
         temp = Path(temp)
         test_source = temp / "flowlens_companion.lua"
@@ -153,7 +154,7 @@ def main():
                 assert int(actual[0]["zero_window"]) > 0 and int(actual[0]["rst"]) > 0
                 assert int(actual[0]["duplicate_ack"]) > 0 and int(actual[0]["out_of_order"]) > 0
                 assert sum(int(row["dns_queries"]) for row in actual) == 1
-            # Export must refuse existing paths without altering the original CSV.
+            # 导出时必须拒绝已存在的路径，且不能改动原 CSV。
             before = destination.read_bytes()
             _, err = run(name + "-overwrite-refused", plugin_args, allow_error=True)
             assert "Destination already exists" in err and before == destination.read_bytes()

@@ -1,4 +1,4 @@
--- 独立的 API 模拟。仅通过 tests/test_plugin.py 运行，切勿安装此文件。
+-- 隔离的 API 模拟，只能通过 tests/test_plugin.py 运行，不要安装这个文件。
 local path = assert(os.getenv("FLOWLENS_TEST_SOURCE"), "Run with test_plugin.py")
 local file = assert(io.open(path, "rb"))
 local source = file:read("*a"); file:close()
@@ -121,7 +121,7 @@ end)
 check("missing tcp.stream does not crash", function()
     local m, c = instance({ ["tcp.stream"] = true })
     local s = m.new_state(); feed(m, c, s, 0, 1)
-    -- Mock extractor is absent, regardless of the supplied packet fields.
+    -- 无论提供什么报文字段，模拟提取器都按缺失处理。
     assert(s.packets == 0 and s.skipped == 1 and #m.snapshot(s) == 0)
 end)
 check("disabled sequence analysis cannot claim LOW/zero anomalies", function()

@@ -1,4 +1,4 @@
-"""Additional independent protocol checks; original 117 Scapy assertions stay in verify.py."""
+"""额外的独立协议检查；原有的 117 项 Scapy 断言仍保留在 verify.py 中。"""
 from pathlib import Path
 import argparse
 import json
