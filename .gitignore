@@ -1,0 +1,65 @@
+# Repository roots allowed for the source-only GitHub repository.
+/*
+!/.clang-format
+!/.gitignore
+!/CMakeLists.txt
+!/LICENSE
+!/include/
+!/src/
+!/tests/
+!/tools/
+!/samples/
+!/wireshark-plugin/
+
+# Only the companion implementation, tests and fixtures belong in this subtree.
+/wireshark-plugin/*
+!/wireshark-plugin/flowlens_companion.lua
+!/wireshark-plugin/.gitignore
+!/wireshark-plugin/tests/
+!/wireshark-plugin/samples/
+
+# Local builds, generated results, dependencies and caches.
+/build*/
+/dist/
+/output/
+/evidence/
+/报告/
+/licenses/qt-conda-recipe/
+/tools/.cache/
+/wireshark-plugin/.runtime/
+/wireshark-plugin/evidence/
+/wireshark-plugin/tests/.scratch/
+__pycache__/
+*.pyc
+*.user
+*.obj
+*.pdb
+*.ilk
+*.tmp
+~$*
+
+# Explanatory materials and local recordings are not source submissions.
+*.md
+*.markdown
+*.rst
+*.adoc
+*.html
+*.htm
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.rtf
+*.mp4
+/README.md
+/THIRD_PARTY_NOTICES.md
+/wireshark-plugin/README.md
+/录屏*.md
+/查看最新测试.html
+/submission.json
+/files.txt
+
+# Test fixtures under samples/ remain eligible for tracking.
+/*.pcap
+/*.pcapng
