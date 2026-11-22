@@ -1,0 +1,562 @@
+{
+  "valid": {
+    "showcase_little.pcapng": {
+      "times": [
+        1794268800000000000,
+        1794268800001000000,
+        1794268800002000000,
+        1794268800003000000,
+        1794268800004000000,
+        1794268800005000000,
+        1794268800006000000,
+        1794268800007000000,
+        1794268800008000000,
+        1794268800009000000,
+        1794268800010000000,
+        1794268800011000000,
+        1794268800012000000,
+        1794268800013000000,
+        1794268800014000000,
+        1794268800015000000,
+        1794268800016000000,
+        1794268800017000000,
+        1794268800018000000,
+        1794268800019000000,
+        1794268800020000000,
+        1794268800021000000
+      ],
+      "links": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "interfaces": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sections": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "available": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "skipped": 0
+    },
+    "showcase_big.pcapng": {
+      "times": [
+        1794268800000000000,
+        1794268800001000000,
+        1794268800002000000,
+        1794268800003000000,
+        1794268800004000000,
+        1794268800005000000,
+        1794268800006000000,
+        1794268800007000000,
+        1794268800008000000,
+        1794268800009000000,
+        1794268800010000000,
+        1794268800011000000,
+        1794268800012000000,
+        1794268800013000000,
+        1794268800014000000,
+        1794268800015000000,
+        1794268800016000000,
+        1794268800017000000,
+        1794268800018000000,
+        1794268800019000000,
+        1794268800020000000,
+        1794268800021000000
+      ],
+      "links": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "interfaces": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sections": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "available": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "skipped": 0
+    },
+    "multi_interface.pcapng": {
+      "times": [
+        1000000,
+        2000000
+      ],
+      "links": [
+        1,
+        101
+      ],
+      "interfaces": [
+        0,
+        1
+      ],
+      "sections": [
+        0,
+        0
+      ],
+      "available": [
+        true,
+        true
+      ],
+      "skipped": 0
+    },
+    "interface_isolation.pcapng": {
+      "times": [
+        1000,
+        2000
+      ],
+      "links": [
+        1,
+        1
+      ],
+      "interfaces": [
+        0,
+        1
+      ],
+      "sections": [
+        0,
+        0
+      ],
+      "available": [
+        true,
+        true
+      ],
+      "skipped": 0
+    },
+    "multi_section.pcapng": {
+      "times": [
+        1000000,
+        2000000
+      ],
+      "links": [
+        1,
+        1
+      ],
+      "interfaces": [
+        0,
+        0
+      ],
+      "sections": [
+        0,
+        1
+      ],
+      "available": [
+        true,
+        true
+      ],
+      "skipped": 0
+    },
+    "binary_resolution.pcapng": {
+      "times": [
+        3500000000
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "binary_63.pcapng": {
+      "times": [
+        1999999999
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "binary_127.pcapng": {
+      "times": [
+        0
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "decimal_subnanosecond.pcapng": {
+      "times": [
+        1234567890
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "decimal_127.pcapng": {
+      "times": [
+        0
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "negative_offset.pcapng": {
+      "times": [
+        1500000000
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "obsolete_packet.pcapng": {
+      "times": [
+        2500000000
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "simple_packet.pcapng": {
+      "times": [
+        0
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        false
+      ],
+      "skipped": 0
+    },
+    "simple_truncated.pcapng": {
+      "times": [
+        0
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        false
+      ],
+      "skipped": 0
+    },
+    "unlimited_snapshot.pcapng": {
+      "times": [
+        1000
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    },
+    "ancillary_block.pcapng": {
+      "times": [
+        1000
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 1
+    },
+    "known_section_length.pcapng": {
+      "times": [
+        1000
+      ],
+      "links": [
+        1
+      ],
+      "interfaces": [
+        0
+      ],
+      "sections": [
+        0
+      ],
+      "available": [
+        true
+      ],
+      "skipped": 0
+    }
+  },
+  "invalid": [
+    "bad_trailer.pcapng",
+    "truncated_block.pcapng",
+    "partial_header.pcapng",
+    "unknown_interface.pcapng",
+    "missing_idb.pcapng",
+    "captured_above_original.pcapng",
+    "snaplen_exceeded.pcapng",
+    "bad_bom.pcapng",
+    "unsupported_version.pcapng",
+    "huge_block.pcapng",
+    "unaligned_block.pcapng",
+    "short_block.pcapng",
+    "short_packet_data.pcapng",
+    "bad_option_length.pcapng",
+    "bad_tsresol_size.pcapng",
+    "duplicate_tsresol.pcapng",
+    "early_end_of_options.pcapng",
+    "section_length_short.pcapng",
+    "section_length_truncated.pcapng",
+    "section_negative_length.pcapng",
+    "timestamp_overflow.pcapng",
+    "binary_timestamp_overflow.pcapng",
+    "timestamp_underflow.pcapng",
+    "timestamp_offset_overflow.pcapng",
+    "simple_extra_data.pcapng"
+  ]
+}

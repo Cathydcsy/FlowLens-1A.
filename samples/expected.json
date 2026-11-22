@@ -1,0 +1,12 @@
+{
+  "description": "Synthetic documentation address space only; expected values are defined before analysis.",
+  "packets": 22,
+  "request": "GET /lab?course=security HTTP/1.1\r\nHost: lab.example\r\nUser-Agent: FlowLens-fixture\r\nContent-Length: 0\r\n\r\n",
+  "response": "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 20\r\n\r\nHello from FlowLens!",
+  "tcp_streams": 4,
+  "dns_packets": 2,
+  "nonstandard_http_port": 18080,
+  "retransmitted_bytes": 29,
+  "source": "192.0.2.10",
+  "destination": "198.51.100.20"
+}
