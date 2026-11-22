@@ -1,4 +1,4 @@
--- Isolated API simulation. Run only via tests/test_plugin.py, never install this file.
+-- 独立的 API 模拟。仅通过 tests/test_plugin.py 运行，切勿安装此文件。
 local path = assert(os.getenv("FLOWLENS_TEST_SOURCE"), "Run with test_plugin.py")
 local file = assert(io.open(path, "rb"))
 local source = file:read("*a"); file:close()
