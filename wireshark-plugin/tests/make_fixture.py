@@ -1,4 +1,3 @@
-"""Deterministic, offline-only TCP anomaly / DNS fixture; Python standard library."""
 from pathlib import Path
 import socket
 import struct
